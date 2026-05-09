@@ -1,0 +1,9 @@
+{
+  "name": "sample-engine",
+  "version": "1.0.0",
+  "language": "node",
+  "entrypoint": "server.js",
+  "port": 3000,
+  "build": "npm install",
+  "run": "npm start"
+}

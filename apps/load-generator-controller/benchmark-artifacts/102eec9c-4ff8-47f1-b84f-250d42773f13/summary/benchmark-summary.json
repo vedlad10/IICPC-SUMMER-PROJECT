@@ -1,0 +1,94 @@
+{
+  "benchmarkRunId": "102eec9c-4ff8-47f1-b84f-250d42773f13",
+  "scenarioName": "smoke",
+  "startedAt": "2026-05-09T13:19:38.007Z",
+  "completedAt": "2026-05-09T13:19:50.049Z",
+  "durationMs": 12042,
+  "totalRequests": 168,
+  "successfulRequests": 57,
+  "failedRequests": 111,
+  "errorRate": 0.66,
+  "avgLatencyMs": 11.29,
+  "p50LatencyMs": 9,
+  "p95LatencyMs": 33,
+  "p99LatencyMs": 46.99,
+  "throughputRps": 13.95,
+  "perOperation": [
+    {
+      "operation": "get_orderbook",
+      "count": 51,
+      "successCount": 51,
+      "failureCount": 0,
+      "avgLatencyMs": 9.35,
+      "p50LatencyMs": 8,
+      "p95LatencyMs": 15.5,
+      "p99LatencyMs": 33.5
+    },
+    {
+      "operation": "create_order",
+      "count": 96,
+      "successCount": 0,
+      "failureCount": 96,
+      "avgLatencyMs": 12.5,
+      "p50LatencyMs": 10,
+      "p95LatencyMs": 39,
+      "p99LatencyMs": 49.5
+    },
+    {
+      "operation": "health",
+      "count": 6,
+      "successCount": 6,
+      "failureCount": 0,
+      "avgLatencyMs": 10.83,
+      "p50LatencyMs": 5,
+      "p95LatencyMs": 31.5,
+      "p99LatencyMs": 38.3
+    },
+    {
+      "operation": "cancel_order",
+      "count": 15,
+      "successCount": 0,
+      "failureCount": 15,
+      "avgLatencyMs": 10.33,
+      "p50LatencyMs": 8,
+      "p95LatencyMs": 20.7,
+      "p99LatencyMs": 25.74
+    }
+  ],
+  "warmupRequests": 20,
+  "scenario": {
+    "name": "smoke",
+    "durationSeconds": 10,
+    "warmupSeconds": 2,
+    "concurrency": 2,
+    "seed": 42,
+    "requestTimeoutMs": 5000,
+    "thinkTimeMs": 100,
+    "operations": [
+      {
+        "operation": "create_order",
+        "weight": 50,
+        "method": "POST",
+        "path": "/orders"
+      },
+      {
+        "operation": "cancel_order",
+        "weight": 15,
+        "method": "POST",
+        "path": "/cancel"
+      },
+      {
+        "operation": "get_orderbook",
+        "weight": 30,
+        "method": "GET",
+        "path": "/orderbook"
+      },
+      {
+        "operation": "health",
+        "weight": 5,
+        "method": "GET",
+        "path": "/health"
+      }
+    ]
+  }
+}

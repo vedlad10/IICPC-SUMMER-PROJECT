@@ -1,0 +1,9 @@
+{
+  "name": "my-order-book-engine",
+  "version": "1.0.0",
+  "language": "node",
+  "entrypoint": "src/server.js",
+  "port": 8080,
+  "build": "npm install --omit=dev",
+  "run": "node src/server.js"
+}

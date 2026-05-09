@@ -1,0 +1,21 @@
+{
+  "buildJobId": "d0dd8dc9-e02c-4608-bffe-d6309e0d52cb",
+  "submissionId": "6ea7e275-04d5-466e-89ef-27cf1b3b01ba",
+  "status": "SUCCESS",
+  "buildExitCode": 0,
+  "hasDockerfile": true,
+  "manifest": {
+    "name": "sample-engine",
+    "version": "1.0.0",
+    "language": "node",
+    "entrypoint": "server.js",
+    "port": 3000,
+    "build": "npm install",
+    "run": "npm start"
+  },
+  "workspacePath": "d0dd8dc9-e02c-4608-bffe-d6309e0d52cb\\src",
+  "outputPath": "d0dd8dc9-e02c-4608-bffe-d6309e0d52cb\\output",
+  "logPath": "d0dd8dc9-e02c-4608-bffe-d6309e0d52cb\\logs\\build.log.json",
+  "startedAt": "2026-05-09T13:18:47.387Z",
+  "completedAt": "2026-05-09T13:18:49.759Z"
+}

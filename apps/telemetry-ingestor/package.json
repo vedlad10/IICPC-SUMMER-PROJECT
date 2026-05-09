@@ -1,0 +1,26 @@
+{
+  "name": "@benchmark/telemetry-ingestor",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@benchmark/config": "workspace:*",
+    "@benchmark/db": "workspace:*",
+    "@benchmark/logger": "workspace:*",
+    "@benchmark/shared-types": "workspace:*",
+    "@fastify/cors": "^8.5.0",
+    "@questdb/nodejs-client": "^4.2.0",
+    "dotenv": "^17.4.2",
+    "fastify": "^4.0.0",
+    "kafkajs": "^2.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.0"
+  }
+}

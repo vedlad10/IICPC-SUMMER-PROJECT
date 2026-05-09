@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.turbo/
+.next/
+out/
+build/
+*.log
+.DS_Store
+# .env is explicitly included per user request

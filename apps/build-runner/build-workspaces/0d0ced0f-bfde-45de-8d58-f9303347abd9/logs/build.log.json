@@ -1,0 +1,70 @@
+[
+  {
+    "ts": "2026-05-09T13:17:22.594Z",
+    "step": "claim",
+    "level": "info",
+    "msg": "Claimed BuildJob",
+    "data": {
+      "buildJobId": "0d0ced0f-bfde-45de-8d58-f9303347abd9",
+      "submissionId": "2e359efa-1caa-47a6-ba6b-3f1cfd52bdbf"
+    }
+  },
+  {
+    "ts": "2026-05-09T13:17:22.594Z",
+    "step": "resolve",
+    "level": "info",
+    "msg": "Resolving submission artifact"
+  },
+  {
+    "ts": "2026-05-09T13:17:22.595Z",
+    "step": "resolve",
+    "level": "info",
+    "msg": "Artifact located",
+    "data": {
+      "artifactPath": "C:\\IICPC SUMMER PROJECT\\apps\\submission-api\\storage\\submissions\\2e359efa-1caa-47a6-ba6b-3f1cfd52bdbf\\original\\artifact.zip"
+    }
+  },
+  {
+    "ts": "2026-05-09T13:17:22.595Z",
+    "step": "workspace",
+    "level": "info",
+    "msg": "Initializing build workspace"
+  },
+  {
+    "ts": "2026-05-09T13:17:22.598Z",
+    "step": "extract",
+    "level": "info",
+    "msg": "Extracting archive",
+    "data": {
+      "format": ".zip"
+    }
+  },
+  {
+    "ts": "2026-05-09T13:17:22.599Z",
+    "step": "extract",
+    "level": "info",
+    "msg": "Detected zip archive"
+  },
+  {
+    "ts": "2026-05-09T13:17:22.610Z",
+    "step": "extract",
+    "level": "info",
+    "msg": "Extraction complete",
+    "data": {
+      "fileCount": 5,
+      "totalBytes": 5298
+    }
+  },
+  {
+    "ts": "2026-05-09T13:17:22.611Z",
+    "step": "validate",
+    "level": "info",
+    "msg": "Validating submission manifest"
+  },
+  {
+    "ts": "2026-05-09T13:17:22.612Z",
+    "step": "finalize",
+    "level": "error",
+    "msg": "Manifest validation failed: Missing required file: benchmark.manifest.json"
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "name": "@benchmark/build-runner",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test:manifest": "ts-node src/__tests__/manifest.test.ts",
+    "test:executor": "ts-node src/__tests__/executor.test.ts",
+    "test:pipeline": "ts-node src/__tests__/pipeline.integration.ts"
+  },
+  "dependencies": {
+    "@benchmark/config": "workspace:*",
+    "@benchmark/db": "workspace:*",
+    "@benchmark/logger": "workspace:*",
+    "@benchmark/shared-types": "workspace:*",
+    "@fastify/cors": "^8.5.0",
+    "@types/adm-zip": "^0.5.5",
+    "adm-zip": "^0.5.16",
+    "dotenv": "^17.4.2",
+    "fastify": "^4.0.0",
+    "tar": "^7.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/tar": "^6.1.13",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.0"
+  }
+}

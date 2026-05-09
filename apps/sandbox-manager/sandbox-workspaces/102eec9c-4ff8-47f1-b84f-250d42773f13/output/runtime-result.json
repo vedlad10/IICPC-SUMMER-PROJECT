@@ -1,0 +1,31 @@
+{
+  "benchmarkRunId": "102eec9c-4ff8-47f1-b84f-250d42773f13",
+  "submissionId": "6ea7e275-04d5-466e-89ef-27cf1b3b01ba",
+  "buildJobId": "d0dd8dc9-e02c-4608-bffe-d6309e0d52cb",
+  "status": "READY",
+  "containerId": "22f304ee01ea1d0a72deaac14b589e7f20a3df9acfa883487ecf357eadfc2c9d",
+  "containerName": "sandbox-102eec9c-4ff8-47f1-b84f-250d42773f13",
+  "runtimeHost": "127.0.0.1",
+  "runtimePort": 55877,
+  "internalPort": 3000,
+  "readinessAt": "2026-05-09T13:19:26.412Z",
+  "cleanupAt": null,
+  "limits": {
+    "cpus": "1.0",
+    "memoryMb": 512,
+    "pidsLimit": 256,
+    "readOnlyRootfs": true,
+    "tmpfsSizeMb": 64,
+    "startupTimeoutMs": 15000,
+    "readinessTimeoutMs": 30000
+  },
+  "manifest": {
+    "name": "sample-engine",
+    "language": "node",
+    "entrypoint": "server.js",
+    "port": 3000,
+    "run": "npm start"
+  },
+  "startedAt": "2026-05-09T13:19:24.670Z",
+  "completedAt": "2026-05-09T13:19:26.413Z"
+}

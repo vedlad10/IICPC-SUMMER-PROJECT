@@ -1,0 +1,138 @@
+[
+  {
+    "ts": "2026-05-09T13:18:47.387Z",
+    "step": "claim",
+    "level": "info",
+    "msg": "Claimed BuildJob",
+    "data": {
+      "buildJobId": "d0dd8dc9-e02c-4608-bffe-d6309e0d52cb",
+      "submissionId": "6ea7e275-04d5-466e-89ef-27cf1b3b01ba"
+    }
+  },
+  {
+    "ts": "2026-05-09T13:18:47.388Z",
+    "step": "resolve",
+    "level": "info",
+    "msg": "Resolving submission artifact"
+  },
+  {
+    "ts": "2026-05-09T13:18:47.388Z",
+    "step": "resolve",
+    "level": "info",
+    "msg": "Artifact located",
+    "data": {
+      "artifactPath": "C:\\IICPC SUMMER PROJECT\\apps\\submission-api\\storage\\submissions\\6ea7e275-04d5-466e-89ef-27cf1b3b01ba\\original\\artifact.zip"
+    }
+  },
+  {
+    "ts": "2026-05-09T13:18:47.388Z",
+    "step": "workspace",
+    "level": "info",
+    "msg": "Initializing build workspace"
+  },
+  {
+    "ts": "2026-05-09T13:18:47.390Z",
+    "step": "extract",
+    "level": "info",
+    "msg": "Extracting archive",
+    "data": {
+      "format": ".zip"
+    }
+  },
+  {
+    "ts": "2026-05-09T13:18:47.391Z",
+    "step": "extract",
+    "level": "info",
+    "msg": "Detected zip archive"
+  },
+  {
+    "ts": "2026-05-09T13:18:47.399Z",
+    "step": "extract",
+    "level": "info",
+    "msg": "Extraction complete",
+    "data": {
+      "fileCount": 7,
+      "totalBytes": 35286
+    }
+  },
+  {
+    "ts": "2026-05-09T13:18:47.400Z",
+    "step": "validate",
+    "level": "info",
+    "msg": "Validating submission manifest"
+  },
+  {
+    "ts": "2026-05-09T13:18:47.400Z",
+    "step": "validate",
+    "level": "info",
+    "msg": "Manifest valid",
+    "data": {
+      "manifest": {
+        "name": "sample-engine",
+        "version": "1.0.0",
+        "language": "node",
+        "entrypoint": "server.js",
+        "port": 3000,
+        "build": "npm install",
+        "run": "npm start"
+      }
+    }
+  },
+  {
+    "ts": "2026-05-09T13:18:47.401Z",
+    "step": "validate",
+    "level": "info",
+    "msg": "Dockerfile detected — container build deferred to Phase 4"
+  },
+  {
+    "ts": "2026-05-09T13:18:47.403Z",
+    "step": "build",
+    "level": "info",
+    "msg": "Executing build command",
+    "data": {
+      "command": "npm install",
+      "cwd": "C:\\IICPC SUMMER PROJECT\\apps\\build-runner\\build-workspaces\\d0dd8dc9-e02c-4608-bffe-d6309e0d52cb\\src",
+      "timeoutMs": 120000
+    }
+  },
+  {
+    "ts": "2026-05-09T13:18:47.872Z",
+    "step": "build:stderr",
+    "level": "warn",
+    "msg": "npm warn Unknown env config \"recursive\". This will stop working in the next major version of npm."
+  },
+  {
+    "ts": "2026-05-09T13:18:49.720Z",
+    "step": "build:stdout",
+    "level": "info",
+    "msg": "\nadded 69 packages, and audited 70 packages in 2s"
+  },
+  {
+    "ts": "2026-05-09T13:18:49.721Z",
+    "step": "build:stdout",
+    "level": "info",
+    "msg": "\n16 packages are looking for funding\n  run `npm fund` for details"
+  },
+  {
+    "ts": "2026-05-09T13:18:49.722Z",
+    "step": "build:stdout",
+    "level": "info",
+    "msg": "\nfound 0 vulnerabilities"
+  },
+  {
+    "ts": "2026-05-09T13:18:49.759Z",
+    "step": "build",
+    "level": "info",
+    "msg": "Build command completed",
+    "data": {
+      "exitCode": 0,
+      "durationMs": 2356
+    }
+  },
+  {
+    "ts": "2026-05-09T13:18:49.759Z",
+    "step": "finalize",
+    "level": "info",
+    "msg": "Build succeeded — writing result"
+  }
+]

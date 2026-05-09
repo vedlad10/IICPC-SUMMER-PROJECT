@@ -1,0 +1,116 @@
+[
+  {
+    "ts": "2026-05-09T14:22:56.373Z",
+    "step": "claim",
+    "level": "info",
+    "msg": "Claimed BenchmarkRun",
+    "data": {
+      "benchmarkRunId": "1ced017c-883c-4217-8365-dae45db9711f",
+      "submissionId": "66cf9379-785a-4bf6-99f2-8176e2a71538",
+      "buildJobId": "8d1048bf-ee38-4965-8f7b-5301dc9b2368"
+    }
+  },
+  {
+    "ts": "2026-05-09T14:22:56.375Z",
+    "step": "resolve",
+    "level": "info",
+    "msg": "Resolving runtime contract from successful BuildJob"
+  },
+  {
+    "ts": "2026-05-09T14:22:56.376Z",
+    "step": "resolve",
+    "level": "info",
+    "msg": "Runtime contract resolved",
+    "data": {
+      "manifest": {
+        "name": "sample-engine",
+        "language": "node",
+        "entrypoint": "server.js",
+        "port": 3000,
+        "run": "npm start"
+      },
+      "srcDir": "C:\\IICPC SUMMER PROJECT\\apps\\build-runner\\build-workspaces\\8d1048bf-ee38-4965-8f7b-5301dc9b2368\\src"
+    }
+  },
+  {
+    "ts": "2026-05-09T14:22:56.382Z",
+    "step": "launch",
+    "level": "info",
+    "msg": "Preparing sandbox container",
+    "data": {
+      "containerName": "sandbox-1ced017c-883c-4217-8365-dae45db9711f",
+      "image": "node:18-alpine",
+      "internalPort": 3000,
+      "hostPort": 53636,
+      "limits": {
+        "cpus": "1.0",
+        "memoryMb": 512,
+        "pidsLimit": 256,
+        "readOnlyRootfs": true,
+        "tmpfsSizeMb": 64,
+        "startupTimeoutMs": 15000,
+        "readinessTimeoutMs": 30000
+      }
+    }
+  },
+  {
+    "ts": "2026-05-09T14:22:56.383Z",
+    "step": "launch",
+    "level": "info",
+    "msg": "Executing: docker create --name sandbox-1ced017c-883c-4217-8365-dae45db9711f --cpus=1.0 --memory=512m --pids-limit=256 --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --cap-drop=ALL --security-opt=no-new-privileges:true --no-healthcheck --restart=no --network=bridge -p 127.0.0.1:53636:3000 -v \"/C/IICPC SUMMER PROJECT/apps/build-runner/build-workspaces/8d1048bf-ee38-4965-8f7b-5301dc9b2368/src:/app:ro\" -w /app -e PORT=3000 node:18-alpine sh -c \"npm start\""
+  },
+  {
+    "ts": "2026-05-09T14:22:56.813Z",
+    "step": "launch",
+    "level": "info",
+    "msg": "Container created",
+    "data": {
+      "containerId": "676d586f0ac345a7de7ed01b81e4019cd4cbeb78783da385d0d2eb6c816e1d2c",
+      "containerName": "sandbox-1ced017c-883c-4217-8365-dae45db9711f"
+    }
+  },
+  {
+    "ts": "2026-05-09T14:22:56.814Z",
+    "step": "launch",
+    "level": "info",
+    "msg": "Executing: docker start 676d586f0ac345a7de7ed01b81e4019cd4cbeb78783da385d0d2eb6c816e1d2c"
+  },
+  {
+    "ts": "2026-05-09T14:22:58.508Z",
+    "step": "launch",
+    "level": "info",
+    "msg": "Container started"
+  },
+  {
+    "ts": "2026-05-09T14:22:58.508Z",
+    "step": "launch",
+    "level": "info",
+    "msg": "Sandbox container running",
+    "data": {
+      "containerId": "676d586f0ac345a7de7ed01b81e4019cd4cbeb78783da385d0d2eb6c816e1d2c",
+      "hostPort": 53636
+    }
+  },
+  {
+    "ts": "2026-05-09T14:22:58.521Z",
+    "step": "readiness",
+    "level": "info",
+    "msg": "Waiting for TCP port 53636 (timeout 30000ms)"
+  },
+  {
+    "ts": "2026-05-09T14:22:58.523Z",
+    "step": "readiness",
+    "level": "info",
+    "msg": "Port 53636 is reachable"
+  },
+  {
+    "ts": "2026-05-09T14:22:58.523Z",
+    "step": "readiness",
+    "level": "info",
+    "msg": "Sandbox is READY",
+    "data": {
+      "readinessAt": "2026-05-09T14:22:58.523Z",
+      "hostPort": 53636
+    }
+  }
+]

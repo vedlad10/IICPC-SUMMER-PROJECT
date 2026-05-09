@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String       @id @default(uuid())
+  email       String       @unique
+  name        String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  submissions Submission[]
+}
+
+model Submission {
+  id               String           @id @default(uuid())
+  userId           String
+  user             User             @relation(fields: [userId], references: [id])
+  status           SubmissionStatus @default(PENDING)
+  // Artifact metadata — stored path is deterministic; original metadata preserved here
+  originalFilename String?
+  storedFilename   String?
+  storedPath       String?
+  mimeType         String?
+  sizeBytes        BigInt?
+  uploadedAt       DateTime?
+  // TODO(Phase 3): add checksum (sha256) column once hashing is integrated
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  buildJobs        BuildJob[]
+  benchmarkRuns    BenchmarkRun[]
+}
+
+enum SubmissionStatus {
+  PENDING
+  BUILDING
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+model BuildJob {
+  id               String    @id @default(uuid())
+  submissionId     String
+  submission       Submission @relation(fields: [submissionId], references: [id])
+  status           JobStatus @default(QUEUED)
+  // Phase 3 fields
+  startedAt        DateTime?
+  completedAt      DateTime?
+  workspacePath    String?   // logical path to extracted workspace
+  outputPath       String?   // logical path to build output dir
+  logPath          String?   // logical path to structured log file
+  errorMessage     String?   // human-readable failure reason
+  buildExitCode    Int?      // exit code of manifest build command (null = no command / skipped)
+  manifestSnapshot Json?     // snapshot of parsed benchmark.manifest.json at build time
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+enum JobStatus {
+  QUEUED
+  IN_PROGRESS
+  SUCCESS
+  FAILED
+  READY          // Phase 4: sandbox launched and readiness-checked
+  STOPPED        // Phase 4: sandbox intentionally stopped after lifecycle
+  BENCHMARKING   // Phase 5: benchmark traffic actively running
+  EVALUATED      // Phase 6: correctness + scoring complete
+}
+
+model BenchmarkRun {
+  id                    String     @id @default(uuid())
+  submissionId          String
+  submission            Submission @relation(fields: [submissionId], references: [id])
+  status                JobStatus  @default(QUEUED)
+  // Phase 4: sandbox lifecycle fields
+  startedAt             DateTime?
+  completedAt           DateTime?
+  containerId           String?
+  containerName         String?
+  runtimeHost           String?
+  runtimePort           Int?
+  internalPort          Int?
+  readinessAt           DateTime?
+  errorMessage          String?
+  logPath               String?
+  outputPath            String?
+  sandboxMetadata       Json?
+  cleanupAt             DateTime?
+  // Phase 5: benchmark execution fields
+  benchmarkStartedAt    DateTime?
+  benchmarkCompletedAt  DateTime?
+  scenarioName          String?
+  telemetryPath         String?
+  summaryPath           String?
+  requestCount          Int?
+  successCount          Int?
+  failureCount          Int?
+  avgLatencyMs          Float?
+  p50LatencyMs          Float?
+  p95LatencyMs          Float?
+  p99LatencyMs          Float?
+  throughputRps         Float?
+  benchmarkErrorMessage String?
+  // Phase 6: correctness + scoring fields
+  correctnessStatus     String?    // PASS | PASS_WITH_WARNINGS | FAIL
+  correctnessReportPath String?
+  correctnessWarnings   Int?
+  correctnessFailures   Int?
+  scoreValue            Float?
+  scoreReportPath       String?
+  rankingEligible       Boolean    @default(false)
+  evaluatedAt           DateTime?
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+  score                 Score?
+}
+
+model Score {
+  id                       String       @id @default(uuid())
+  benchmarkRunId           String       @unique
+  benchmarkRun             BenchmarkRun @relation(fields: [benchmarkRunId], references: [id])
+  // Raw component scores (0-100 scale)
+  latencyScore             Float
+  throughputScore          Float
+  errorRateScore           Float
+  correctnessMultiplier    Float        // 1.0 / 0.7 / 0.0
+  // Weighted final
+  rawScore                 Float        // before correctness multiplier
+  totalScore               Float        // final score after multiplier
+  // Legacy compatibility
+  latency                  Float        // raw p50 latency for reference
+  throughput               Float        // raw throughput rps for reference
+  correctness              Float        // correctness multiplier for reference
+  createdAt                DateTime     @default(now())
+}
+
+model LeaderboardEntry {
+  id           String   @id @default(uuid())
+  submissionId String   @unique
+  userId       String
+  score        Float
+  rank         Int?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

@@ -1,0 +1,12 @@
+{
+  "name": "sample-engine",
+  "version": "1.0.0",
+  "description": "Small sample contestant engine for benchmark platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

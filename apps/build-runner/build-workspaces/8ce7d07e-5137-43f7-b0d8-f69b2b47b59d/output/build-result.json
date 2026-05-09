@@ -1,0 +1,14 @@
+{
+  "buildJobId": "8ce7d07e-5137-43f7-b0d8-f69b2b47b59d",
+  "submissionId": "ff5cad8f-6234-4000-9599-c43f2b8d6ed4",
+  "status": "FAILED",
+  "failureReason": "Manifest validation failed: Missing required file: benchmark.manifest.json",
+  "buildExitCode": null,
+  "hasDockerfile": false,
+  "manifest": null,
+  "workspacePath": "8ce7d07e-5137-43f7-b0d8-f69b2b47b59d\\src",
+  "outputPath": "8ce7d07e-5137-43f7-b0d8-f69b2b47b59d\\output",
+  "logPath": "8ce7d07e-5137-43f7-b0d8-f69b2b47b59d\\logs\\build.log.json",
+  "startedAt": "2026-05-09T12:56:02.507Z",
+  "completedAt": "2026-05-09T12:56:02.532Z"
+}

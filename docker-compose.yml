@@ -1,0 +1,156 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-benchmark_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-benchmark_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-benchmark_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-benchmark_user} -d ${POSTGRES_DB:-benchmark_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:v23.2.1
+    ports:
+      - "9092:9092"
+    command:
+      - redpanda start
+      - --overprovisioned
+      - --smp 1
+      - --memory 1G
+      - --reserve-memory 0M
+      - --node-id 0
+      - --check=false
+      - --kafka-addr PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --advertise-kafka-addr PLAINTEXT://redpanda:29092,OUTSIDE://localhost:9092
+
+  questdb:
+    image: questdb/questdb:7.3.3
+    ports:
+      - "9003:9000" # QuestDB Web Console
+      - "8812:8812" # QuestDB Postgres Protocol
+      - "9009:9009" # QuestDB ILP
+    volumes:
+      - questdb_data:/var/lib/questdb
+
+  # Backend Services
+  submission-api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: submission-api
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-benchmark_user}:${POSTGRES_PASSWORD:-benchmark_pass}@postgres:5432/${POSTGRES_DB:-benchmark_db}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  build-runner:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: build-runner
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+
+  sandbox-manager:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: sandbox-manager
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+
+  load-generator-controller:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: load-generator-controller
+    ports:
+      - "3004:3004"
+    environment:
+      - PORT=3004
+
+  telemetry-ingestor:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: telemetry-ingestor
+    ports:
+      - "3005:3005"
+    environment:
+      - PORT=3005
+
+  correctness-engine:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: correctness-engine
+    ports:
+      - "3006:3006"
+    environment:
+      - PORT=3006
+
+  scoring-engine:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: scoring-engine
+    ports:
+      - "3007:3007"
+    environment:
+      - PORT=3007
+
+  leaderboard-api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: leaderboard-api
+    ports:
+      - "3008:3008"
+    environment:
+      - PORT=3008
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-benchmark_user}:${POSTGRES_PASSWORD:-benchmark_pass}@postgres:5432/${POSTGRES_DB:-benchmark_db}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  redis_data:
+  questdb_data:
