@@ -4,6 +4,7 @@ dotenv.config({ path: path.join(__dirname, '../../../.env') });
 
 import { Kafka } from 'kafkajs';
 import { Sender } from '@questdb/nodejs-client';
+import cors from '@fastify/cors';
 import Fastify from 'fastify';
 
 const KAFKA_BROKER = process.env.KAFKA_BROKER || 'localhost:9092';
@@ -16,9 +17,10 @@ const kafka = new Kafka({
 });
 
 const consumer = kafka.consumer({ groupId: 'telemetry-ingestor-group' });
-const sender = new Sender({ host: QUESTDB_HOST, port: QUESTDB_PORT });
+const sender = new Sender({ host: QUESTDB_HOST, port: QUESTDB_PORT, protocol: 'tcp', protocol_version: '1' });
 
 const fastify = Fastify({ logger: true });
+fastify.register(cors, { origin: true });
 
 fastify.get('/health', async () => ({ status: 'ok' }));
 
